@@ -27,6 +27,7 @@ jobs:
           destination-github-username: 'VirtualJoe760'
           destination-repository-name: 'jpsrealtor'
           target-directory: 'docs/platform'
+          target-branch: 'v2'
           commit-message: '📚 docs: sync architecture from ChatRealty platform'
           user-email: claude-sync@chatrealty.io
           user-name: ChatRealty Docs Bot
@@ -49,6 +50,7 @@ jobs:
           destination-github-username: 'VirtualJoe760'
           destination-repository-name: 'chatrealty-cms'
           target-directory: 'docs/platform'
+          target-branch: 'main'
           commit-message: '📚 docs: sync architecture from ChatRealty platform'
           user-email: claude-sync@chatrealty.io
           user-name: ChatRealty Docs Bot

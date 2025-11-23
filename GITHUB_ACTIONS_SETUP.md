@@ -2,7 +2,7 @@
 
 **Purpose**: Automatically sync documentation from `chatRealty` to `jpsrealtor` and `chatrealty-cms`
 
-**Status**:   Requires GitHub Token Setup
+**Status**: ï¿½ Requires GitHub Token Setup
 
 ---
 
@@ -19,7 +19,7 @@
 ```
 
 ### **Safety Guarantees**:
-- **ONE-WAY ONLY**: chatRealty ’ agent repos (never reverse)
+- **ONE-WAY ONLY**: chatRealty ï¿½ agent repos (never reverse)
 - **NO CONFLICTS**: Syncs to dedicated `docs/platform/` directory
 - **NO CODE TOUCHED**: Only documentation is synchronized
 - **SYSTEMATIC**: Automatic, consistent, reliable
@@ -30,7 +30,7 @@
 
 ### **Step 1: Create GitHub Personal Access Token**
 
-1. Go to GitHub.com ’ Settings ’ Developer settings ’ Personal access tokens ’ Tokens (classic)
+1. Go to GitHub.com ï¿½ Settings ï¿½ Developer settings ï¿½ Personal access tokens ï¿½ Tokens (classic)
 2. Click "Generate new token (classic)"
 3. Give it a descriptive name: `ChatRealty Docs Sync`
 4. Set expiration: **No expiration** (or 1 year)
@@ -47,7 +47,7 @@
 ### **Step 2: Add Token to chatRealty Repository Secrets**
 
 1. Go to https://github.com/VirtualJoe760/chatRealty
-2. Click **Settings** ’ **Secrets and variables** ’ **Actions**
+2. Click **Settings** ï¿½ **Secrets and variables** ï¿½ **Actions**
 3. Click **New repository secret**
 4. Name: `SYNC_TOKEN`
 5. Value: Paste your personal access token
@@ -62,8 +62,8 @@ Check that `.github/workflows/sync-docs.yml` exists in chatRealty repo.
 **Current workflow**:
 - Triggers on push to `main` branch
 - Monitors `memory-files/**` for changes
-- Syncs to `jpsrealtor/docs/platform/`
-- Syncs to `chatrealty-cms/docs/platform/`
+- Syncs to `jpsrealtor/docs/platform/` (v2 branch - development)
+- Syncs to `chatrealty-cms/docs/platform/` (main branch)
 
 ---
 
@@ -85,7 +85,7 @@ Check that `.github/workflows/sync-docs.yml` exists in chatRealty repo.
 
 ---
 
-## =Ë **Workflow Configuration**
+## =ï¿½ **Workflow Configuration**
 
 ### **File**: `.github/workflows/sync-docs.yml`
 
@@ -115,10 +115,10 @@ jobs:
 ```
 
 ### **What Gets Synced**:
--  `memory-files/` ’ `jpsrealtor/docs/platform/`
--  `memory-files/` ’ `chatrealty-cms/docs/platform/`
--  `DOCS_INDEX.md` ’ Both repos
--  `ARCHITECTURE_UPDATE_SUMMARY.md` ’ Both repos
+-  `memory-files/` ï¿½ `jpsrealtor/docs/platform/`
+-  `memory-files/` ï¿½ `chatrealty-cms/docs/platform/`
+-  `DOCS_INDEX.md` ï¿½ Both repos
+-  `ARCHITECTURE_UPDATE_SUMMARY.md` ï¿½ Both repos
 
 ### **What DOESN'T Get Synced**:
 - L Agent repo code (`src/`, `public/`, etc.)
@@ -127,7 +127,7 @@ jobs:
 
 ---
 
-##   **Important Rules**
+## ï¿½ **Important Rules**
 
 ### **DO**:
 -  Edit docs ONLY in `chatRealty/memory-files/`
@@ -172,7 +172,7 @@ jobs:
 
 ---
 
-## =Ê **Monitoring**
+## =ï¿½ **Monitoring**
 
 ### **View Workflow Runs**:
 https://github.com/VirtualJoe760/chatRealty/actions
@@ -184,7 +184,7 @@ cd jpsrealtor
 git log --oneline docs/platform/ | head -5
 
 # Should show commits like:
-# =Ú docs: sync architecture from ChatRealty platform
+# =ï¿½ docs: sync architecture from ChatRealty platform
 ```
 
 ### **Verify Docs Are Current**:
@@ -198,7 +198,7 @@ ls -la jpsrealtor/docs/platform/
 
 ---
 
-## <¯ **Expected Behavior**
+## <ï¿½ **Expected Behavior**
 
 ### **After Setup**:
 Every time you push docs changes to `chatRealty`:
@@ -210,14 +210,14 @@ Every time you push docs changes to `chatRealty`:
 
 ### **Verification Checklist**:
 - [ ] Can see workflow run in Actions tab
-- [ ] New commit appears in jpsrealtor: "=Ú docs: sync architecture from ChatRealty platform"
+- [ ] New commit appears in jpsrealtor: "=ï¿½ docs: sync architecture from ChatRealty platform"
 - [ ] New commit appears in chatrealty-cms with same message
 - [ ] Files in `docs/platform/` match `memory-files/`
 - [ ] Timestamp on files is recent
 
 ---
 
-## =€ **Best Practices**
+## =ï¿½ **Best Practices**
 
 ### **1. Commit Message Convention**:
 ```bash
@@ -234,7 +234,7 @@ git add memory-files/AUTH_ARCHITECTURE.md
 git add memory-files/DATABASE_ARCHITECTURE.md
 git commit -m "docs: update user schema across AUTH and DATABASE docs"
 git push origin main
-# ’ Triggers ONE sync to all repos
+# ï¿½ Triggers ONE sync to all repos
 ```
 
 ### **3. Review Before Push**:
@@ -251,7 +251,7 @@ git push origin main
 
 ---
 
-## =Ý **Quick Reference**
+## =ï¿½ **Quick Reference**
 
 | Action | Command |
 |--------|---------|
@@ -276,6 +276,6 @@ git push origin main
 
 ---
 
-**Once setup is complete, documentation will automatically stay synchronized across all three repos!** <‰
+**Once setup is complete, documentation will automatically stay synchronized across all three repos!** <ï¿½
 
 No manual copying, no version drift, no conflicts - just push to `chatRealty` and let GitHub Actions handle the rest.
