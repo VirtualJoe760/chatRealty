@@ -1,0 +1,9 @@
+# Test Auto-Sync
+
+This file tests the GitHub Actions auto-sync workflow.
+
+If you see this in:
+- jpsrealtor/docs/platform/TEST_SYNC.md
+- chatrealty-cms/docs/platform/TEST_SYNC.md
+
+Then the auto-sync is working! ✅
