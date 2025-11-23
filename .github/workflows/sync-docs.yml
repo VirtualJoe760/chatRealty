@@ -1,0 +1,27 @@
+name: Sync Documentation to Agent Repos
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'memory-files/**'
+
+jobs:
+  sync-to-jpsrealtor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ChatRealty
+        uses: actions/checkout@v3
+
+      - name: Sync docs to jpsrealtor
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.SYNC_TOKEN }}
+        with:
+          source-directory: 'memory-files'
+          destination-github-username: 'VirtualJoe760'
+          destination-repository-name: 'jpsrealtor'
+          target-directory: 'docs/platform'
+          commit-message: '📚 docs: sync from ChatRealty platform'
+          user-email: actions@github.com
+          user-name: ChatRealty Bot
