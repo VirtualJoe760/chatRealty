@@ -35,7 +35,7 @@
 
 **Primary Site:** JPSRealtor.com (Joseph Sardella, Palm Springs)
 - Frontend: https://jpsrealtor.com
-- Backend CMS: https://cms.jpsrealtor.com
+- Backend CMS: https://cms.chatrealty.io
 - Database: MongoDB Atlas (DigitalOcean)
 
 **Future Sites:** ChatRealty.io agent network
@@ -70,7 +70,7 @@
 │              (PayloadCMS 3.x + Next.js APIs)                    │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  PayloadCMS Backend (cms.jpsrealtor.com)                       │
+│  PayloadCMS Backend (cms.chatrealty.io)                       │
 │  ├─ Authentication (JWT + OAuth)                               │
 │  ├─ User Management (Roles, Tiers, Subscriptions)              │
 │  ├─ Content Management (Cities, Neighborhoods, Blog)           │
@@ -91,7 +91,7 @@
 │              (MongoDB Atlas - DigitalOcean)                     │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  Database: jpsrealtor                                           │
+│  Database: chatrealty                                           │
 │  ├─ users                    (~500 docs) ← Payload managed     │
 │  ├─ payload-preferences      (Payload internal)                │
 │  ├─ payload-migrations       (Payload internal)                │
@@ -245,8 +245,8 @@ Configuration:
   - IP whitelisting
 
 Connection:
-  URI: mongodb+srv://doadmin:***@jpsrealtor-mongodb-911080c1.mongo.ondigitalocean.com/admin
-  Database: jpsrealtor
+  URI: mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@jpsrealtor-mongodb-911080c1.mongo.ondigitalocean.com/admin
+  Database: chatrealty
   Max pool size: 50
   Timeout: 30s
 ```
@@ -340,7 +340,7 @@ F:/web-clients/joseph-sardella/
 │   ├── tailwind.config.ts         # Tailwind config
 │   └── package.json
 │
-└── jpsrealtor-cms/                # PayloadCMS backend
+└── chatrealty-cms/                # PayloadCMS backend
     ├── src/
     │   ├── collections/           # Payload collections
     │   │   ├── Users.ts
@@ -628,9 +628,9 @@ See [MULTI_TENANT_ARCHITECTURE.md](./MULTI_TENANT_ARCHITECTURE.md) for complete 
 - Runtime: Node.js 20.x serverless
 - Regions: Auto (edge globally)
 
-**Backend CMS (jpsrealtor-cms):**
+**Backend CMS (chatrealty-cms):**
 - Platform: DigitalOcean VPS (Droplet)
-- Domain: cms.jpsrealtor.com
+- Domain: cms.chatrealty.io
 - Server: Ubuntu 22.04 LTS
 - Process Manager: PM2
 - Web Server: Nginx (reverse proxy)
@@ -645,7 +645,7 @@ See [MULTI_TENANT_ARCHITECTURE.md](./MULTI_TENANT_ARCHITECTURE.md) for complete 
 - Provider: (your DNS provider)
 - Records:
   - `jpsrealtor.com` → Vercel A/CNAME
-  - `cms.jpsrealtor.com` → VPS IP
+  - `cms.chatrealty.io` → VPS IP
   - `www.jpsrealtor.com` → Vercel redirect
 
 ### Environment Variables
@@ -653,7 +653,7 @@ See [MULTI_TENANT_ARCHITECTURE.md](./MULTI_TENANT_ARCHITECTURE.md) for complete 
 **Frontend (.env.local):**
 ```bash
 # Payload CMS
-NEXT_PUBLIC_CMS_URL=https://cms.jpsrealtor.com
+NEXT_PUBLIC_CMS_URL=https://cms.chatrealty.io
 
 # Database
 MONGODB_URI=mongodb+srv://...
@@ -680,7 +680,7 @@ CLOUDINARY_SECRET=...
 ```bash
 # Payload
 PAYLOAD_SECRET=...
-NEXT_CMS_URL=https://cms.jpsrealtor.com
+NEXT_CMS_URL=https://cms.chatrealty.io
 
 # Database
 MONGODB_URI=mongodb+srv://...

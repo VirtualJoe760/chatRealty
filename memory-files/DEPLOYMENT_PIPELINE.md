@@ -25,17 +25,17 @@ GOOGLE_CLIENT_SECRET=...
 FACEBOOK_APP_ID=...
 FACEBOOK_APP_SECRET=...
 CLOUDINARY_CLOUD_NAME=...
-NEXT_CMS_URL=https://cms.jpsrealtor.com
+NEXT_CMS_URL=https://cms.chatrealty.io
 ```
 
 ---
 
-### Backend/CMS (cms.jpsrealtor.com)
+### Backend/CMS (cms.chatrealty.io)
 **Platform**: DigitalOcean VPS (Droplet)
 **OS**: Ubuntu 22.04
 **IP**: 147.182.236.138
 **Framework**: PayloadCMS 3.64.0 + Next.js 15.1.6
-**URL**: https://cms.jpsrealtor.com
+**URL**: https://cms.chatrealty.io
 **Process Manager**: PM2
 **Reverse Proxy**: Nginx
 **SSL**: Let's Encrypt (Certbot)
@@ -46,7 +46,7 @@ NEXT_CMS_URL=https://cms.jpsrealtor.com
 ssh root@147.182.236.138
 
 # Pull latest code
-cd /var/www/jpsrealtor-cms
+cd /var/www/chatrealty-cms
 git pull origin main
 
 # Install dependencies
@@ -66,7 +66,7 @@ pm2 restart payload-cms
     "name": "payload-cms",
     "script": "npm",
     "args": "start",
-    "cwd": "/var/www/jpsrealtor-cms",
+    "cwd": "/var/www/chatrealty-cms",
     "env": {
       "NODE_ENV": "production",
       "PORT": "3002"
@@ -79,16 +79,16 @@ pm2 restart payload-cms
 ```nginx
 server {
   listen 80;
-  server_name cms.jpsrealtor.com;
+  server_name cms.chatrealty.io;
   return 301 https://$server_name$request_uri;
 }
 
 server {
   listen 443 ssl;
-  server_name cms.jpsrealtor.com;
+  server_name cms.chatrealty.io;
 
-  ssl_certificate /etc/letsencrypt/live/cms.jpsrealtor.com/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/cms.jpsrealtor.com/privkey.pem;
+  ssl_certificate /etc/letsencrypt/live/cms.chatrealty.io/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/cms.chatrealty.io/privkey.pem;
 
   location / {
     proxy_pass http://localhost:3002;
@@ -151,7 +151,7 @@ jobs:
           username: root
           password: ${{ secrets.DO_PASSWORD }}
           script: |
-            cd /var/www/jpsrealtor-cms
+            cd /var/www/chatrealty-cms
             git pull origin main
             npm install
             npm run build

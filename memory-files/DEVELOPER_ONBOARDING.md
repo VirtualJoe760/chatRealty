@@ -21,7 +21,7 @@ This guide will get you up and running in < 30 minutes.
 ```
 chatRealty/
 ├── jpsrealtor/              # Frontend (Next.js 16)
-├── jpsrealtor-cms/          # Backend/CMS (PayloadCMS)
+├── chatrealty-cms/          # Backend/CMS (PayloadCMS)
 └── memory-files/            # Architecture documentation (this!)
 ```
 
@@ -74,7 +74,7 @@ npm run dev
 
 ### 1. Navigate to CMS Directory
 ```bash
-cd jpsrealtor-cms
+cd chatrealty-cms
 ```
 
 ### 2. Install Dependencies
@@ -166,7 +166,7 @@ Visit http://localhost:3002/admin and create your first admin account.
 
 1. Create collection file:
 ```bash
-# jpsrealtor-cms/src/collections/MyCollection.ts
+# chatrealty-cms/src/collections/MyCollection.ts
 import { CollectionConfig } from 'payload';
 
 export const MyCollection: CollectionConfig = {

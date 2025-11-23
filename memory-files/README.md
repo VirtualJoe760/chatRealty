@@ -82,7 +82,7 @@ chatRealty/
 │   ├── src/lib/             # Utilities (MongoDB, Groq, etc.)
 │   └── memory-files/        # Symlink to master docs
 │
-├── jpsrealtor-cms/          # Backend/CMS (PayloadCMS)
+├── chatrealty-cms/          # Backend/CMS (PayloadCMS)
 │   ├── src/collections/     # PayloadCMS collections
 │   ├── payload.config.ts    # CMS configuration
 │   └── memory-files/        # Symlink to master docs
@@ -161,7 +161,7 @@ npm run dev  # http://localhost:3000
 
 ### Backend Development
 ```bash
-cd jpsrealtor-cms
+cd chatrealty-cms
 npm install
 npm run dev  # http://localhost:3002/admin
 ```
@@ -175,7 +175,7 @@ npm run dev  # http://localhost:3002/admin
 cp -r chatRealty/memory-files/* jpsrealtor/memory-files/
 
 # Copy to backend
-cp -r chatRealty/memory-files/* jpsrealtor-cms/memory-files/
+cp -r chatRealty/memory-files/* chatrealty-cms/memory-files/
 ```
 
 ---
@@ -188,7 +188,7 @@ cp -r chatRealty/memory-files/* jpsrealtor-cms/memory-files/
 
 ### Backend (DigitalOcean)
 - **Manual deploy** via SSH + PM2 restart
-- **URL**: https://cms.jpsrealtor.com
+- **URL**: https://cms.chatrealty.io
 
 **See**: `DEPLOYMENT_PIPELINE.md`
 
@@ -230,7 +230,7 @@ cp -r chatRealty/memory-files/* jpsrealtor-cms/memory-files/
 **How to update**:
 1. Edit files in `chatRealty/memory-files/`
 2. Update version number and "Last Updated" date
-3. Sync to jpsrealtor and jpsrealtor-cms
+3. Sync to jpsrealtor and chatrealty-cms
 4. Commit changes
 
 ---

@@ -74,7 +74,7 @@ const optimizedUrl = listing.photos[0].replace(
 
 **Pattern 1**: REST API calls
 ```typescript
-const response = await fetch('https://cms.jpsrealtor.com/api/users/me', {
+const response = await fetch('https://cms.chatrealty.io/api/users/me', {
   credentials: 'include'
 });
 ```

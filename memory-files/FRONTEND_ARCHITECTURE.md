@@ -867,7 +867,7 @@ Response:
 ```typescript
 // 1. User submits credentials
 const login = async (email: string, password: string) => {
-  const response = await fetch('https://cms.jpsrealtor.com/api/users/login', {
+  const response = await fetch('https://cms.chatrealty.io/api/users/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password })

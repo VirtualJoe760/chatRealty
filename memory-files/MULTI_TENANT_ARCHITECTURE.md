@@ -59,7 +59,7 @@ Each tenant has their own domain that maps to a tenant ID.
 {
   tenantId: "jpsrealtor",
   domain: "jpsrealtor.com",
-  cmsUrl: "https://cms.jpsrealtor.com",
+  cmsUrl: "https://cms.chatrealty.io",
   branding: {
     name: "JPS Realtor",
     logo: "https://cdn.jpsrealtor.com/logo.png",

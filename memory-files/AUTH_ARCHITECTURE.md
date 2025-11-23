@@ -58,7 +58,7 @@ The ChatRealty ecosystem uses a **unified authentication system** powered by Pay
 │       └─────────────────┴───────────────┘               │
 │                         ↓                               │
 │              PayloadCMS Auth Service                    │
-│          (cms.jpsrealtor.com/api/users)                 │
+│          (cms.chatrealty.io/api/users)                 │
 │                         ↓                               │
 │                   MongoDB Users                         │
 └─────────────────────────────────────────────────────────┘
@@ -130,7 +130,7 @@ The ChatRealty ecosystem uses a **unified authentication system** powered by Pay
 2. User enters email + password
    ↓
 3. Frontend submits credentials
-   POST https://cms.jpsrealtor.com/api/users/login
+   POST https://cms.chatrealty.io/api/users/login
    {
      "email": "user@example.com",
      "password": "securePassword123"
@@ -180,7 +180,7 @@ export default function SignInPage() {
 
     try {
       // 1. Authenticate with PayloadCMS
-      const response = await fetch('https://cms.jpsrealtor.com/api/users/login', {
+      const response = await fetch('https://cms.chatrealty.io/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -262,7 +262,7 @@ export async function POST(req: NextRequest) {
 2. User enters email, password, name
    ↓
 3. Frontend submits registration
-   POST https://cms.jpsrealtor.com/api/users
+   POST https://cms.chatrealty.io/api/users
    {
      "email": "newuser@example.com",
      "password": "securePassword123",
@@ -293,7 +293,7 @@ const handleSignUp = async (e: React.FormEvent) => {
   e.preventDefault();
 
   try {
-    const response = await fetch('https://cms.jpsrealtor.com/api/users', {
+    const response = await fetch('https://cms.chatrealty.io/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -423,7 +423,7 @@ export async function GET(req: NextRequest) {
 ```typescript
 // Check if user exists
 let payloadUser = await fetch(
-  `https://cms.jpsrealtor.com/api/users?where[email][equals]=${googleUser.email}`,
+  `https://cms.chatrealty.io/api/users?where[email][equals]=${googleUser.email}`,
   {
     headers: {
       Authorization: `Bearer ${process.env.PAYLOAD_API_KEY}`,
@@ -433,7 +433,7 @@ let payloadUser = await fetch(
 
 if (payloadUser.docs.length === 0) {
   // Create new user
-  payloadUser = await fetch('https://cms.jpsrealtor.com/api/users', {
+  payloadUser = await fetch('https://cms.chatrealty.io/api/users', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -460,7 +460,7 @@ if (payloadUser.docs.length === 0) {
 **6. Next.js logs in user via PayloadCMS**
 ```typescript
 // Authenticate as user to get JWT
-const loginResponse = await fetch('https://cms.jpsrealtor.com/api/users/login', {
+const loginResponse = await fetch('https://cms.chatrealty.io/api/users/login', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -581,7 +581,7 @@ export async function middleware(req: NextRequest) {
 
     // If token expires in < 7 days, refresh it
     if (timeUntilExpiry < 7 * 24 * 60 * 60 * 1000) {
-      const refreshResponse = await fetch('https://cms.jpsrealtor.com/api/users/refresh-token', {
+      const refreshResponse = await fetch('https://cms.chatrealty.io/api/users/refresh-token', {
         method: 'POST',
         headers: { Cookie: `payload-token=${token}` },
       });
@@ -616,7 +616,7 @@ export async function middleware(req: NextRequest) {
 // User clicks logout
 const handleLogout = async () => {
   // 1. Call PayloadCMS logout endpoint (optional, for server-side cleanup)
-  await fetch('https://cms.jpsrealtor.com/api/users/logout', {
+  await fetch('https://cms.chatrealty.io/api/users/logout', {
     method: 'POST',
     credentials: 'include',
   });
@@ -671,7 +671,7 @@ export async function POST() {
 
 **Shared cookie domain**: `.jpsrealtor.com`
 
-**Result**: User authenticated on `jpsrealtor.com` is also authenticated on `cms.jpsrealtor.com` and future `agent2.jpsrealtor.com`.
+**Result**: User authenticated on `jpsrealtor.com` is also authenticated on `cms.chatrealty.io` and future `agent2.jpsrealtor.com`.
 
 **Implementation**:
 ```typescript
@@ -711,7 +711,7 @@ export async function GET(req: NextRequest) {
   }
 
   // Verify token and get user
-  const userResponse = await fetch('https://cms.jpsrealtor.com/api/users/me', {
+  const userResponse = await fetch('https://cms.chatrealty.io/api/users/me', {
     headers: { Cookie: `payload-token=${token}` },
   });
 
@@ -735,7 +735,7 @@ export default function AdminPanel() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch('https://cms.jpsrealtor.com/api/users/me', {
+    fetch('https://cms.chatrealty.io/api/users/me', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -881,7 +881,7 @@ secure: process.env.NODE_ENV === 'production'
 
 **Example**:
 ```typescript
-const response = await fetch('https://cms.jpsrealtor.com/api/users/me', {
+const response = await fetch('https://cms.chatrealty.io/api/users/me', {
   credentials: 'include', // Automatically includes cookies
 });
 
@@ -899,7 +899,7 @@ const user = await response.json();
 export async function GET(req: NextRequest) {
   const token = req.cookies.get('payload-token')?.value;
 
-  const response = await fetch('https://cms.jpsrealtor.com/api/users/me', {
+  const response = await fetch('https://cms.chatrealty.io/api/users/me', {
     headers: {
       Cookie: `payload-token=${token}`,
     },
@@ -923,7 +923,7 @@ export async function GET(req: NextRequest) {
 
 **Usage**:
 ```typescript
-const response = await fetch('https://cms.jpsrealtor.com/api/users', {
+const response = await fetch('https://cms.chatrealty.io/api/users', {
   headers: {
     Authorization: `Bearer ${process.env.PAYLOAD_API_KEY}`,
   },
@@ -971,7 +971,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   const fetchUser = async () => {
     try {
-      const response = await fetch('https://cms.jpsrealtor.com/api/users/me', {
+      const response = await fetch('https://cms.chatrealty.io/api/users/me', {
         credentials: 'include',
       });
 
@@ -993,7 +993,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const response = await fetch('https://cms.jpsrealtor.com/api/users/login', {
+    const response = await fetch('https://cms.chatrealty.io/api/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
@@ -1075,7 +1075,7 @@ export async function middleware(req: NextRequest) {
   }
 
   // Verify token with PayloadCMS
-  const userResponse = await fetch('https://cms.jpsrealtor.com/api/users/me', {
+  const userResponse = await fetch('https://cms.chatrealty.io/api/users/me', {
     headers: { Cookie: `payload-token=${token}` },
   });
 
@@ -1164,7 +1164,7 @@ export const config = {
 
 ```typescript
 try {
-  const response = await fetch('https://cms.jpsrealtor.com/api/users/me', {
+  const response = await fetch('https://cms.chatrealty.io/api/users/me', {
     credentials: 'include',
   });
 

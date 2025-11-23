@@ -36,11 +36,11 @@ The JPSRealtor backend is powered by **PayloadCMS 3.64.0**, a headless CMS that 
 
 **Core Principle**: PayloadCMS is the **SINGLE SOURCE OF TRUTH** for authentication and user data. All user-facing applications authenticate through PayloadCMS and consume its APIs.
 
-**Repository**: `F:/web-clients/joseph-sardella/jpsrealtor-cms`
+**Repository**: `F:/web-clients/joseph-sardella/chatrealty-cms`
 
-**Deployed URL**: `https://cms.jpsrealtor.com`
+**Deployed URL**: `https://cms.chatrealty.io`
 
-**Admin Panel**: `https://cms.jpsrealtor.com/admin`
+**Admin Panel**: `https://cms.chatrealty.io/admin`
 
 ---
 
@@ -83,7 +83,7 @@ The JPSRealtor backend is powered by **PayloadCMS 3.64.0**, a headless CMS that 
 
 ### Configuration File: `payload.config.ts`
 
-**Location**: `F:/web-clients/joseph-sardella/jpsrealtor-cms/payload.config.ts:1`
+**Location**: `F:/web-clients/joseph-sardella/chatrealty-cms/payload.config.ts:1`
 
 ```typescript
 export default buildConfig({
@@ -94,7 +94,7 @@ export default buildConfig({
   cors: [
     'https://jpsrealtor.com',
     'https://www.jpsrealtor.com',
-    'https://cms.jpsrealtor.com',
+    'https://cms.chatrealty.io',
     'http://localhost:3000',
   ],
 
@@ -102,7 +102,7 @@ export default buildConfig({
   csrf: [
     'https://jpsrealtor.com',
     'https://www.jpsrealtor.com',
-    'https://cms.jpsrealtor.com',
+    'https://cms.chatrealty.io',
     'http://localhost:3000',
   ],
 
@@ -118,7 +118,7 @@ export default buildConfig({
   ],
 
   // Server URL
-  serverURL: process.env.NEXT_CMS_URL || 'https://cms.jpsrealtor.com',
+  serverURL: process.env.NEXT_CMS_URL || 'https://cms.chatrealty.io',
 
   // JWT secret
   secret: process.env.PAYLOAD_SECRET || 'YOUR_SECRET_HERE',
@@ -157,7 +157,7 @@ export default buildConfig({
 ### Directory Structure
 
 ```
-jpsrealtor-cms/
+chatrealty-cms/
 ├── src/
 │   ├── collections/
 │   │   ├── Users.ts                  # User management + auth
@@ -581,7 +581,7 @@ const user = await payload.auth.verifyToken(req.cookies['payload-token']);
    GET https://www.googleapis.com/oauth2/v1/userinfo
    ↓
 7. Next.js creates/updates user in PayloadCMS
-   POST https://cms.jpsrealtor.com/api/users
+   POST https://cms.chatrealty.io/api/users
    {
      "email": "user@gmail.com",
      "profile": {
@@ -624,7 +624,7 @@ export async function GET(req: Request, { params }: { params: { nextauth: string
     });
 
     // Create/update user in PayloadCMS
-    const payloadResponse = await fetch('https://cms.jpsrealtor.com/api/users/oauth', {
+    const payloadResponse = await fetch('https://cms.chatrealty.io/api/users/oauth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -708,7 +708,7 @@ export async function GET(req: Request, { params }: { params: { nextauth: string
 
 ### PayloadCMS Auto-Generated REST API
 
-**Base URL**: `https://cms.jpsrealtor.com/api`
+**Base URL**: `https://cms.chatrealty.io/api`
 
 **Authentication**: Include `payload-token` cookie or `Authorization: Bearer <token>` header
 
@@ -961,7 +961,7 @@ await sendEmail({
 
 **Upload Directory**: `/public/media/`
 
-**URL Pattern**: `https://cms.jpsrealtor.com/media/{filename}`
+**URL Pattern**: `https://cms.chatrealty.io/media/{filename}`
 
 **Max File Size**: 10MB (configurable)
 
@@ -1074,7 +1074,7 @@ fields: [
 **Pattern 1: Direct API Calls**
 ```typescript
 // Frontend fetches user profile from CMS
-const response = await fetch('https://cms.jpsrealtor.com/api/users/me', {
+const response = await fetch('https://cms.chatrealty.io/api/users/me', {
   credentials: 'include', // Include cookies
 });
 const user = await response.json();
@@ -1085,7 +1085,7 @@ const user = await response.json();
 // app/neighborhoods/[cityId]/[slug]/page.tsx
 export default async function SubdivisionPage({ params }) {
   const subdivision = await fetch(
-    `https://cms.jpsrealtor.com/api/neighborhoods/slug/${params.slug}`
+    `https://cms.chatrealty.io/api/neighborhoods/slug/${params.slug}`
   ).then(res => res.json());
 
   return <SubdivisionPageClient subdivision={subdivision} />;
@@ -1105,7 +1105,7 @@ export async function middleware(req: Request) {
   }
 
   // Validate token with PayloadCMS
-  const user = await fetch('https://cms.jpsrealtor.com/api/users/me', {
+  const user = await fetch('https://cms.chatrealty.io/api/users/me', {
     headers: { Cookie: `payload-token=${token}` }
   }).then(res => res.json());
 
@@ -1308,7 +1308,7 @@ hooks: {
 
 ## Next Steps for Developers
 
-1. **Set up local CMS**: Clone `jpsrealtor-cms`, run `npm install`, configure `.env`
+1. **Set up local CMS**: Clone `chatrealty-cms`, run `npm install`, configure `.env`
 2. **Start dev server**: `npm run dev` (runs on http://localhost:3002)
 3. **Access admin panel**: http://localhost:3002/admin
 4. **Create admin user**: First user auto-promoted to admin
