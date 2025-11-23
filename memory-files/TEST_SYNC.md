@@ -7,3 +7,5 @@ If you see this in:
 - chatrealty-cms/docs/platform/TEST_SYNC.md
 
 Then the auto-sync is working! ✅
+
+<!-- Testing with regenerated token - Sun, Nov 23, 2025  3:29:48 PM -->
