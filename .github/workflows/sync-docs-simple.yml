@@ -21,15 +21,17 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY_RSA }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
+          echo "${{ secrets.DEPLOY_KEY_JPS }}" > ~/.ssh/deploy_key_jps
+          echo "${{ secrets.DEPLOY_KEY_CMS }}" > ~/.ssh/deploy_key_cms
+          chmod 600 ~/.ssh/deploy_key_jps
+          chmod 600 ~/.ssh/deploy_key_cms
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.email "claude-sync@chatrealty.io"
           git config --global user.name "ChatRealty Docs Bot"
 
       - name: Sync to jpsrealtor v2 branch
         env:
-          GIT_SSH_COMMAND: "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no"
+          GIT_SSH_COMMAND: "ssh -i ~/.ssh/deploy_key_jps -o StrictHostKeyChecking=no"
         run: |
           # Clone jpsrealtor
           git clone --single-branch --branch v2 git@github.com:VirtualJoe760/jpsrealtor.git /tmp/jpsrealtor
@@ -48,7 +50,7 @@ jobs:
 
       - name: Sync to chatrealty-cms main branch
         env:
-          GIT_SSH_COMMAND: "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no"
+          GIT_SSH_COMMAND: "ssh -i ~/.ssh/deploy_key_cms -o StrictHostKeyChecking=no"
         run: |
           # Clone chatrealty-cms
           git clone --single-branch --branch main git@github.com:VirtualJoe760/chatrealty-cms.git /tmp/chatrealty-cms
@@ -68,5 +70,5 @@ jobs:
       - name: Cleanup
         if: always()
         run: |
-          rm -f ~/.ssh/deploy_key
+          rm -f ~/.ssh/deploy_key_jps ~/.ssh/deploy_key_cms
           echo "✅ Documentation successfully synced to all agent repos"
