@@ -1,0 +1,72 @@
+name: Sync Documentation (Simple)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'memory-files/**'
+      - 'DOCS_INDEX.md'
+      - 'ARCHITECTURE_UPDATE_SUMMARY.md'
+
+jobs:
+  sync-docs:
+    name: Sync docs to agent repos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ChatRealty
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.email "claude-sync@chatrealty.io"
+          git config --global user.name "ChatRealty Docs Bot"
+
+      - name: Sync to jpsrealtor v2 branch
+        env:
+          GIT_SSH_COMMAND: "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no"
+        run: |
+          # Clone jpsrealtor
+          git clone --single-branch --branch v2 git@github.com:VirtualJoe760/jpsrealtor.git /tmp/jpsrealtor
+
+          # Create docs/platform directory if it doesn't exist
+          mkdir -p /tmp/jpsrealtor/docs/platform
+
+          # Copy all files from memory-files to docs/platform
+          cp -r memory-files/* /tmp/jpsrealtor/docs/platform/
+
+          # Commit and push
+          cd /tmp/jpsrealtor
+          git add docs/platform/
+          git diff --staged --quiet || git commit -m "📚 docs: sync architecture from ChatRealty platform"
+          git push origin v2
+
+      - name: Sync to chatrealty-cms main branch
+        env:
+          GIT_SSH_COMMAND: "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no"
+        run: |
+          # Clone chatrealty-cms
+          git clone --single-branch --branch main git@github.com:VirtualJoe760/chatrealty-cms.git /tmp/chatrealty-cms
+
+          # Create docs/platform directory if it doesn't exist
+          mkdir -p /tmp/chatrealty-cms/docs/platform
+
+          # Copy all files from memory-files to docs/platform
+          cp -r memory-files/* /tmp/chatrealty-cms/docs/platform/
+
+          # Commit and push
+          cd /tmp/chatrealty-cms
+          git add docs/platform/
+          git diff --staged --quiet || git commit -m "📚 docs: sync architecture from ChatRealty platform"
+          git push origin main
+
+      - name: Cleanup
+        if: always()
+        run: |
+          rm -f ~/.ssh/deploy_key
+          echo "✅ Documentation successfully synced to all agent repos"
