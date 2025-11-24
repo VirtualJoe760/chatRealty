@@ -17,3 +17,5 @@ Then the auto-sync is working! ✅
 <!-- Testing with custom simple workflow - 2025-11-23_16:04:13 -->
 
 <!-- Final test with OpenSSH keys and simple workflow - 2025-11-23_16:12:05 -->
+
+<!-- Testing with RSA keys (PEM format) - 2025-11-23_16:30:56 -->
