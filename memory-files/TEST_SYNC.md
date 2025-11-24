@@ -15,3 +15,5 @@ Then the auto-sync is working! ✅
 <!-- Final test with SSH deploy keys on both repos - 2025-11-23_15:59:47 -->
 
 <!-- Testing with custom simple workflow - 2025-11-23_16:04:13 -->
+
+<!-- Final test with OpenSSH keys and simple workflow - 2025-11-23_16:12:05 -->
